@@ -22,7 +22,6 @@ function SingleUser() {
     axios
       .get(`https://api.github.com/users/${id}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(fetchSingleUser(res.data));
       })
       .then(() => {
@@ -38,8 +37,6 @@ function SingleUser() {
   };
 
   function formatDate(date) {
-    console.log(date);
-    console.log("from date function");
     const arrayOfMonths = [
       "Jan",
       "Feb",

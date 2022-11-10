@@ -9,11 +9,9 @@ function SearchUsers() {
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
-  const error = useSelector((state) => state.users.error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
     dispatch(fetchUsers(input));
   };
 

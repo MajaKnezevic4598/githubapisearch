@@ -16,7 +16,7 @@ function SearchUsers() {
     console.log(input);
     dispatch(fetchUsers(input));
   };
- 
+
   return (
     <div>
       <section>
@@ -49,7 +49,7 @@ function SearchUsers() {
                   <img src={user.avatar_url} alt="" className="user-img" />
                 </div>
                 <div className="info-conteiner">
-                  <div>Name: {user.name}</div>
+                  <div>Name: {user.login}</div>
 
                   <div>User Public</div>
                   <div>description:</div>

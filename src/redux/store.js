@@ -18,7 +18,7 @@ import usersReducer from "./users/usersReducer";
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  card: singleUserReducer,
+  user: singleUserReducer,
 });
 
 const persistConfig = {

@@ -4,13 +4,13 @@ import {
   FETCH_USERS_FAILURE,
 } from "./usersTypes";
 
-const initialState = {
+const initialUsersState = {
   loading: false,
   users: [],
   error: "",
 };
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialUsersState, action) => {
   switch (action.type) {
     case FETCH_USERS_REQUEST: {
       return {

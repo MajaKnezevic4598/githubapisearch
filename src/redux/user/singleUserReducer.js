@@ -1,36 +1,22 @@
-import {
-  FETCH_SINGLE_USER_REQUEST,
-  FETCH_SINGLE_USER_SUCCESS,
-  FETCH_SINGLE_USER_FAILURE,
-} from "./singleUserTypes";
+import { FETCH_SINGLE_USER, FETCH_SINGLE_USER_REPOS } from "./singleUserTypes";
 
-const initialState = {
-  loading: false,
+const initialUserState = {
   user: [],
-  error: "",
+  repos: [],
 };
 
-const singleUserReducer = (state = initialState, action) => {
+const singleUserReducer = (state = initialUserState, action) => {
   switch (action.type) {
-    case FETCH_SINGLE_USER_REQUEST: {
+    case FETCH_SINGLE_USER: {
       return {
         ...state,
-        loading: true,
-      };
-    }
-    case FETCH_SINGLE_USER_SUCCESS: {
-      return {
-        loading: false,
         user: action.payload,
-        error: "",
       };
     }
-
-    case FETCH_SINGLE_USER_FAILURE: {
+    case FETCH_SINGLE_USER_REPOS: {
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        repos: action.payload,
       };
     }
 

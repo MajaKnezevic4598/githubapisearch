@@ -28,10 +28,12 @@ export const fetchUsersFailure = (error) => {
 
 export const fetchUsers = (findUsers) => {
   return (dispatch) => {
+    let finnalUsers = [];
+
     dispatch(fetchUsersRequest());
     axios
       .get(
-        `https://api.github.com/search/users?q=${findUsers}in:login type:user"`,
+        `https://api.github.com/search/users?q=${findUsers}in:login+type:user&per_page=10`,
         {
           mode: "cors",
           header: {
@@ -41,14 +43,30 @@ export const fetchUsers = (findUsers) => {
         }
       )
       .then((response) => {
-        // response.data is the users
-        const users = response.data;
-        console.log(users);
-        dispatch(fetchUsersSuccess(users));
+        let users = response.data.items;
+        return users;
       })
-      .catch((error) => {
-        // error.message is the error message
-        dispatch(fetchUsersFailure(error.message));
+      .then((users) => {
+        users.forEach((user) => {
+          axios
+            .get(`https://api.github.com/users/${user.login}`)
+            .then((res) => {
+              finnalUsers.push({
+                ...user,
+                name: res.data.name,
+                description: res.data.bio,
+              });
+              return finnalUsers;
+            })
+            .then((value) => {
+              setTimeout(() => {
+                dispatch(fetchUsersSuccess(finnalUsers));
+              }, 1000);
+            })
+            .catch((error) => {
+              dispatch(fetchUsersFailure(error.message));
+            });
+        });
       });
   };
 };
